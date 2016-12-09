@@ -1,6 +1,10 @@
 
-" Start the cursor from where you last left off in the file
-autocmd BufReadPost * call s:SetCursorPosition()
+augroup vimSaveCursorPosition
+  au!
+  " Start the cursor from where you last left off in the file
+  autocmd BufReadPost * call s:SetCursorPosition()
+au END
+
 function! s:SetCursorPosition()
   if &filetype !~ 'svn\|commit\c'
     if line("'\"") > 0 && line("'\"") <= line("$")
