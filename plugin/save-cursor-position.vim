@@ -2,14 +2,5 @@
 augroup vimSaveCursorPosition
   au!
   " Start the cursor from where you last left off in the file
-  autocmd BufReadPost * call s:SetCursorPosition()
+   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 au END
-
-function! s:SetCursorPosition()
-  if &filetype !~ 'svn\|commit\c'
-    if line("'\"") > 0 && line("'\"") <= line("$")
-      exe "normal! g`\""
-      normal! zz
-    endif
-  end
-endfunction
